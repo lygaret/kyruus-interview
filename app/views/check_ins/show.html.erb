@@ -2,6 +2,4 @@
 <ul>
   <li>Start PHQ screener</li>
 </ul>
-<%= form_for(:check_in, url: check_in_path, method: :put, id: 1) do |f| %>
-  <%= f.submit "Complete check in" %>
-<% end %>
+<%= link_to "Start PHQ screener", new_check_in_phq_assessment_path(check_in_id: @check_in.id) %>
