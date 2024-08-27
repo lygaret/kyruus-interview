@@ -1,5 +1,5 @@
 <p>
-  <%= @assessment.prompt %>
+  Over the past 2 weeks, how often have you been bothered by any of the following problems?
 </p>
 
 <%= form_with method: "put" do |form| %>
@@ -9,7 +9,7 @@
     <label>
       <%= question[:prompt] %>
       <%= form.hidden_field "response[][qid]", value: question[:qid] %>
-      <%= form.select "response[][score]", @assessment.response_options %>
+      <%= form.select("response[][score]", @assessment.responses.map { |r| [r[:label], r[:score]] }) %>
     </label>
   </li>
   <% end %>`

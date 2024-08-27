@@ -1,11 +1,6 @@
 class Assessment
   class PHQ < Assessment
 
-    PROMPT = <<~PROMPT
-      Over the past 2 weeks, how often have you been bothered
-      by any of the following problems?
-    PROMPT
-
     QUESTIONS = [
       { qid: 1, prompt: "Little interest or pleasure in doing things?" },
       { qid: 2, prompt: "Feeling down, depressed or hopeless?" },
@@ -33,11 +28,16 @@ class Assessment
     # in the future, these will be metaprogrammed out of the base class
     # but the idea is basically the same
 
-    def prompt    = PROMPT
     def questions = QUESTIONS
+    def responses = RESPONSES
 
-    def response_options
-      RESPONSES.map { |r| [ r[:label], r[:score] ] }
+    def process_params!(params)
+      resp_params = params.permit(response: [:qid, :score])
+      resp_params = resp_params["response"]
+
+      resp_params.map do |r|
+        r.transform_values { |v| v.to_i }
+      end
     end
 
     def calculate_result!
