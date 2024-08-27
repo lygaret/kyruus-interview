@@ -5,6 +5,7 @@ class Assessment < ApplicationRecord
   self.store_full_sti_class = false
 
   scope :of_key, ->(key) { where(key:) }
+  scope :incomplete, ->() { where(response: nil) }
   scope :with_response, ->() { where.not(response: nil) }
   scope :with_result,   ->() { where.not(result: nil) }
 
