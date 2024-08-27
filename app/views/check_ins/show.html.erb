@@ -1,5 +1,35 @@
 <p>Please complete all of the steps on this page:</p>
+
 <ul>
-  <li>Start PHQ screener</li>
+  <% @check_in.assessments.incomplete.each do |assessment| %>
+  <li>
+    <%=
+      link_to(
+        "Start #{assessment.key} screener",
+        check_in_assessment_path(check_in_id: @check_in.id, id: assessment.id)
+      )
+    %>
+  </li>
+  <% end %>
+
+  <% needs_screen = false %>
+  <% needs_message = false %>
+
+  <% @check_in.assessments.with_result.each do |assessment| %>
+    <% needs_message = true %>
+    <% if assessment.result["needs_screen"] %>
+      <% needs_screen = true %>
+      <li>
+        According to the <%= assessment.key %> screener,
+        completed <%= assessment.result_at %>,
+        you should complete additional screening.
+      </li>
+    <% end %>
+  <% end %>
+
+  <% if needs_message && !needs_screen %>
+    <li>
+      According to your screeners, no additional screening is required.
+    </li>
+  <% end %>
 </ul>
-<%= link_to "Start PHQ screener", new_check_in_phq_assessment_path(check_in_id: @check_in.id) %>
