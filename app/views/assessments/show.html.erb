@@ -1,0 +1,18 @@
+<p>
+  <%= @assessment.prompt %>
+</p>
+
+<%= form_with method: "put" do |form| %>
+<ul>
+  <% @assessment.questions.each do |question| %>
+  <li>
+    <label>
+      <%= question[:prompt] %>
+      <%= form.hidden_field "response[][qid]", value: question[:qid] %>
+      <%= form.select "response[][score]", @assessment.response_options %>
+    </label>
+  </li>
+  <% end %>`
+</ul>
+<%= form.submit %>
+<% end %>
