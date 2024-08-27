@@ -24,11 +24,11 @@ RSpec.describe CheckInsController, type: :controller do
 
     it "redirects to the check_in show page" do
       check_in = create(:check_in, id: 1)
-      allow(CheckIn).to receive(:create).and_return(check_in)
+      allow(CheckIn).to receive(:create!).and_return(check_in)
 
       post :create
 
-      expect(CheckIn).to have_received(:create)
+      expect(CheckIn).to have_received(:create!)
       expect(response).to redirect_to check_in_path(1)
     end
   end

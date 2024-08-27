@@ -3,7 +3,7 @@ class CheckInsController < ApplicationController
   end
 
   def create
-    check_in = CheckIn.create(patient_id: "1")
+    check_in = CheckInService.check_in!(patient_id: "1")
     redirect_to check_in_path(check_in)
   end
 
