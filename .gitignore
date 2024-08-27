@@ -38,3 +38,5 @@
 .ruby-version
 yarn-debug.log*
 .yarn-integrity
+
+/vendor/postgres
