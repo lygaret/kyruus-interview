@@ -17,7 +17,7 @@ ActiveRecord::Schema.define(version: 2024_08_27_145209) do
 
   create_table "assessments", force: :cascade do |t|
     t.bigint "check_in_id", null: false
-    t.string "key", null: false, comment: "the assessment key; 'PHQ9', etc."
+    t.string "key", null: false, comment: "the assessment key; 'PHQ', etc."
     t.jsonb "response", comment: "the response values from the patient"
     t.datetime "response_at"
     t.jsonb "result", comment: "the post-processed results from scoring the response"

@@ -4,7 +4,7 @@ class CreateAssessments < ActiveRecord::Migration[6.1]
 
     create_table :assessments do |t|
       t.belongs_to :check_in, null: false
-      t.string :key, null: false, comment: "the assessment key; 'PHQ9', etc."
+      t.string :key, null: false, comment: "the assessment key; 'PHQ', etc."
 
       t.jsonb :response, comment: "the response values from the patient"
       t.datetime :response_at

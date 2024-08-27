@@ -9,5 +9,5 @@ class Assessment < ApplicationRecord
   scope :with_result,   ->() { where.not(result: nil) }
 
   validates :check_in_id, presence: true
-  validates :key,         presence: true, inclusion: { in: %w[PHQ9] }
+  validates :key,         presence: true, inclusion: { in: %w[PHQ] }
 end

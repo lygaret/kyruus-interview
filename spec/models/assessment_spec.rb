@@ -3,10 +3,10 @@ require 'rails_helper'
 RSpec.describe Assessment, type: :model do
   it { is_expected.to validate_presence_of :check_in_id }
   it { is_expected.to validate_presence_of :key }
-  it { is_expected.to validate_inclusion_of(:key).in_array(%w[PHQ9]) }
+  it { is_expected.to validate_inclusion_of(:key).in_array(%w[PHQ]) }
 
-  describe "phq9" do
-    subject(:assessment) { create(:assessment_phq9) }
+  describe "phq" do
+    subject(:assessment) { create(:assessment_phq) }
 
     let (:response_json) do
       [
