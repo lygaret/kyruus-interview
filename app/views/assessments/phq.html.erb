@@ -9,7 +9,7 @@
     <label>
       <%= question[:prompt] %>
       <%= form.hidden_field "response[][qid]", value: question[:qid] %>
-      <%= form.select("response[][score]", @assessment.responses.map { |r| [r[:label], r[:score]] }) %>
+      <%= form.select("response[][score]", @assessment.responses.map { |r| [r[:label], r[:score]] }, {}, data: { qid: question[:qid] }) %>
     </label>
   </li>
   <% end %>`
