@@ -10,12 +10,17 @@ RSpec.describe Assessment, type: :model do
 
     let (:response_json) do
       [
-        { "qid" => 1, "resp" => 2 },
-        { "qid" => 2, "resp" => 3}
+        { "qid" => 1, "score" => 2 },
+        { "qid" => 2, "score" => 3 }
       ]
     end
 
-    let (:result_json) { { "score" => 3 } }
+    let (:result_json) do
+      {
+        "total_score" => 3,
+        "needs_screen" => false
+      }
+    end
 
     describe "#response" do
       it "can store valid hashes" do
@@ -23,6 +28,13 @@ RSpec.describe Assessment, type: :model do
 
         result = Assessment.find(assessment.id)
         expect(result.response).to match(response_json)
+      end
+
+      it "can not store invalid hashes" do
+        assessment.response = { "wrong" => :format }
+
+        expect(assessment).not_to be_valid
+        expect(assessment.errors).to have_key(:response)
       end
     end
 
