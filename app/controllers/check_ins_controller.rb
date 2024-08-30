@@ -9,6 +9,7 @@ class CheckInsController < ApplicationController
 
   def show
     @check_in = CheckIn.find(params[:id])
+    @personalization_info = PersonalizationService.fetch!(patient_id: @check_in.patient_id)
   end
 
   def update
