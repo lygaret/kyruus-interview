@@ -1,6 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe CheckInsController, type: :controller do
+  include_context "with personalization info"
+
   describe "routing" do
     it { should route(:get, "/check_ins/new").to(action: :new) }
     it { should route(:post, "/check_ins").to(action: :create) }
